@@ -26,7 +26,7 @@ const galleryImages = [gallery1, gallery2, gallery3, gallery4, gallery5, gallery
 
 const Index = () => {
   return (
-    <main className="pb-16 md:pb-0">
+    <main className="pb-16 md:pb-0 overflow-x-hidden">
       {/* Hero */}
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
