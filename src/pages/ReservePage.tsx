@@ -51,31 +51,31 @@ const ReservePage = () => (
 
               <div className="gold-divider-left" />
 
-              <div className="flex flex-col gap-3">
+              <div className="flex flex-col gap-3 w-full">
                 <a
                   href="https://zomato.com"
                   target="_blank"
                   rel="noreferrer"
-                  className="flex items-center justify-center gap-2 px-6 py-3 bg-primary text-primary-foreground text-xs uppercase tracking-[0.2em] hover:bg-gold-light transition-all duration-500"
+                  className="flex items-center justify-center gap-2 px-4 py-3 bg-primary text-primary-foreground text-xs uppercase tracking-[0.15em] hover:bg-gold-light transition-all duration-500 min-w-0"
                 >
-                  <ExternalLink size={14} />
-                  Reserve on Zomato
+                  <ExternalLink size={14} className="shrink-0" />
+                  <span className="truncate">Reserve on Zomato</span>
                 </a>
                 <a
                   href="tel:+910000000000"
-                  className="flex items-center justify-center gap-2 px-6 py-3 border border-primary text-primary text-xs uppercase tracking-[0.2em] hover:bg-primary hover:text-primary-foreground transition-all duration-500"
+                  className="flex items-center justify-center gap-2 px-4 py-3 border border-primary text-primary text-xs uppercase tracking-[0.15em] hover:bg-primary hover:text-primary-foreground transition-all duration-500 min-w-0"
                 >
-                  <Phone size={14} />
-                  Call Now
+                  <Phone size={14} className="shrink-0" />
+                  <span className="truncate">Call Now</span>
                 </a>
                 <a
                   href="https://instagram.com"
                   target="_blank"
                   rel="noreferrer"
-                  className="flex items-center justify-center gap-2 px-6 py-3 border border-border text-muted-foreground text-xs uppercase tracking-[0.2em] hover:border-primary hover:text-primary transition-all duration-500"
+                  className="flex items-center justify-center gap-2 px-4 py-3 border border-border text-muted-foreground text-xs uppercase tracking-[0.15em] hover:border-primary hover:text-primary transition-all duration-500 min-w-0"
                 >
-                  <Instagram size={14} />
-                  Instagram
+                  <Instagram size={14} className="shrink-0" />
+                  <span className="truncate">Instagram</span>
                 </a>
               </div>
             </div>
@@ -83,7 +83,7 @@ const ReservePage = () => (
 
           {/* Map */}
           <FadeIn delay={0.2}>
-            <div className="aspect-square md:aspect-auto md:h-full min-h-[400px] bg-card rounded-sm overflow-hidden">
+            <div className="aspect-square md:aspect-auto md:h-full min-h-[300px] bg-card rounded-sm overflow-hidden">
               <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3783.204308!2d73.8567!3d18.5204!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTjCsDMxJzEzLjQiTiA3M8KwNTEnMjQuMSJF!5e0!3m2!1sen!2sin!4v1"
                 className="w-full h-full border-0 grayscale invert opacity-60"
