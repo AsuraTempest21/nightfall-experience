@@ -26,7 +26,7 @@ const galleryImages = [gallery1, gallery2, gallery3, gallery4, gallery5, gallery
 
 const Index = () => {
   return (
-    <main className="pb-16 md:pb-0 overflow-x-hidden">
+    <main className="pb-16 md:pb-0">
       {/* Hero */}
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
@@ -178,7 +178,7 @@ const Index = () => {
       </section>
 
       {/* Location + CTA */}
-      <section className="py-20 md:py-32 bg-muted">
+      <section className="py-20 md:py-32 bg-muted overflow-hidden">
         <div className="container">
           <div className="grid md:grid-cols-2 gap-12">
             <FadeIn>
