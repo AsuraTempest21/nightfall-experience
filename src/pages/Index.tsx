@@ -178,8 +178,8 @@ const Index = () => {
       </section>
 
       {/* Location + CTA */}
-      <section className="py-20 md:py-32 bg-muted overflow-hidden">
-        <div className="container">
+      <section className="py-20 md:py-32 bg-muted">
+        <div className="container overflow-hidden">
           <div className="grid md:grid-cols-2 gap-12">
             <FadeIn>
               <div className="aspect-video md:aspect-auto md:h-full min-h-[300px] bg-card rounded-sm overflow-hidden">
@@ -206,31 +206,31 @@ const Index = () => {
                   </div>
                 </div>
                 <div className="gold-divider-left mb-8" />
-                <div className="flex flex-col sm:flex-row gap-3">
+                <div className="flex flex-col gap-3 w-full">
                   <a
                     href="https://zomato.com"
                     target="_blank"
                     rel="noreferrer"
-                    className="flex items-center justify-center gap-2 px-6 py-3 bg-primary text-primary-foreground text-xs uppercase tracking-[0.2em] hover:bg-gold-light transition-all duration-500"
+                    className="flex items-center justify-center gap-2 px-4 py-3 bg-primary text-primary-foreground text-xs uppercase tracking-[0.15em] hover:bg-gold-light transition-all duration-500 min-w-0"
                   >
-                    <ExternalLink size={14} />
-                    Reserve on Zomato
+                    <ExternalLink size={14} className="shrink-0" />
+                    <span className="truncate">Reserve on Zomato</span>
                   </a>
                   <a
                     href="tel:+910000000000"
-                    className="flex items-center justify-center gap-2 px-6 py-3 border border-primary text-primary text-xs uppercase tracking-[0.2em] hover:bg-primary hover:text-primary-foreground transition-all duration-500"
+                    className="flex items-center justify-center gap-2 px-4 py-3 border border-primary text-primary text-xs uppercase tracking-[0.15em] hover:bg-primary hover:text-primary-foreground transition-all duration-500 min-w-0"
                   >
-                    <Phone size={14} />
-                    Call Now
+                    <Phone size={14} className="shrink-0" />
+                    <span className="truncate">Call Now</span>
                   </a>
                   <a
                     href="https://instagram.com"
                     target="_blank"
                     rel="noreferrer"
-                    className="flex items-center justify-center gap-2 px-6 py-3 border border-border text-muted-foreground text-xs uppercase tracking-[0.2em] hover:border-primary hover:text-primary transition-all duration-500"
+                    className="flex items-center justify-center gap-2 px-4 py-3 border border-border text-muted-foreground text-xs uppercase tracking-[0.15em] hover:border-primary hover:text-primary transition-all duration-500 min-w-0"
                   >
-                    <Instagram size={14} />
-                    Instagram
+                    <Instagram size={14} className="shrink-0" />
+                    <span className="truncate">Instagram</span>
                   </a>
                 </div>
               </div>
