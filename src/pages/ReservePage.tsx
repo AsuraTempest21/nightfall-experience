@@ -51,19 +51,19 @@ const ReservePage = () => (
 
               <div className="gold-divider-left" />
 
-              <div className="flex flex-col gap-3 w-full">
+              <div className="flex flex-col gap-3 w-full overflow-hidden">
                 <a
                   href="https://zomato.com"
                   target="_blank"
                   rel="noreferrer"
-                  className="flex items-center justify-center gap-2 px-4 py-3 bg-primary text-primary-foreground text-xs uppercase tracking-[0.15em] hover:bg-gold-light transition-all duration-500 min-w-0"
+                  className="flex items-center justify-center gap-2 px-3 py-3 bg-primary text-primary-foreground text-[10px] sm:text-xs uppercase tracking-[0.1em] sm:tracking-[0.15em] hover:bg-gold-light transition-all duration-500 w-full box-border"
                 >
                   <ExternalLink size={14} className="shrink-0" />
                   <span className="truncate">Reserve on Zomato</span>
                 </a>
                 <a
                   href="tel:+910000000000"
-                  className="flex items-center justify-center gap-2 px-4 py-3 border border-primary text-primary text-xs uppercase tracking-[0.15em] hover:bg-primary hover:text-primary-foreground transition-all duration-500 min-w-0"
+                  className="flex items-center justify-center gap-2 px-3 py-3 border border-primary text-primary text-[10px] sm:text-xs uppercase tracking-[0.1em] sm:tracking-[0.15em] hover:bg-primary hover:text-primary-foreground transition-all duration-500 w-full box-border"
                 >
                   <Phone size={14} className="shrink-0" />
                   <span className="truncate">Call Now</span>
@@ -72,7 +72,7 @@ const ReservePage = () => (
                   href="https://instagram.com"
                   target="_blank"
                   rel="noreferrer"
-                  className="flex items-center justify-center gap-2 px-4 py-3 border border-border text-muted-foreground text-xs uppercase tracking-[0.15em] hover:border-primary hover:text-primary transition-all duration-500 min-w-0"
+                  className="flex items-center justify-center gap-2 px-3 py-3 border border-border text-muted-foreground text-[10px] sm:text-xs uppercase tracking-[0.1em] sm:tracking-[0.15em] hover:border-primary hover:text-primary transition-all duration-500 w-full box-border"
                 >
                   <Instagram size={14} className="shrink-0" />
                   <span className="truncate">Instagram</span>
