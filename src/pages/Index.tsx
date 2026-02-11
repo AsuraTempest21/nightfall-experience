@@ -26,7 +26,7 @@ const galleryImages = [gallery1, gallery2, gallery3, gallery4, gallery5, gallery
 
 const Index = () => {
   return (
-    <main className="pb-16 md:pb-0">
+    <main className="pb-16 md:pb-0 overflow-x-hidden">
       {/* Hero */}
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
@@ -182,7 +182,7 @@ const Index = () => {
         <div className="container overflow-hidden">
           <div className="grid md:grid-cols-2 gap-12">
             <FadeIn>
-              <div className="aspect-video md:aspect-auto md:h-full min-h-[300px] bg-card rounded-sm overflow-hidden">
+              <div className="aspect-video md:aspect-auto md:h-full min-h-[300px] bg-card rounded-sm overflow-hidden max-w-full">
                 <iframe
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3783.204308!2d73.8567!3d18.5204!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTjCsDMxJzEzLjQiTiA3M8KwNTEnMjQuMSJF!5e0!3m2!1sen!2sin!4v1"
                   className="w-full h-full border-0 grayscale invert opacity-60"
@@ -206,7 +206,7 @@ const Index = () => {
                   </div>
                 </div>
                 <div className="gold-divider-left mb-8" />
-                <div className="flex flex-col gap-3 w-full overflow-hidden">
+                <div className="flex flex-col gap-3 w-full overflow-hidden px-1">
                   <a
                     href="https://zomato.com"
                     target="_blank"
