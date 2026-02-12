@@ -58,8 +58,19 @@
     @apply border-border;
   }
 
+  html {
+    overflow-x: clip;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  html::-webkit-scrollbar {
+    display: none;
+  }
+
   body {
-    @apply bg-background text-foreground font-body antialiased overflow-x-hidden;
+    @apply bg-background text-foreground font-body antialiased;
+    overflow-x: clip;
   }
 
   h1, h2, h3, h4, h5, h6 {
