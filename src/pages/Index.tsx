@@ -178,11 +178,11 @@ const Index = () => {
       </section>
 
       {/* Location + CTA */}
-      <section className="py-20 md:py-32 bg-muted overflow-hidden">
-        <div className="container px-4 md:px-6">
-          <div className="grid md:grid-cols-2 gap-12">
+      <section className="py-20 md:py-32 bg-muted">
+        <div className="container overflow-hidden">
+          <div className="grid md:grid-cols-2 gap-12 [&>*]:min-w-0">
             <FadeIn>
-              <div className="aspect-video md:aspect-auto md:h-full min-h-[300px] bg-card rounded-sm overflow-hidden max-w-full">
+              <div className="aspect-video md:aspect-auto md:h-full min-h-[300px] bg-card rounded-sm overflow-hidden">
                 <iframe
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3783.204308!2d73.8567!3d18.5204!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTjCsDMxJzEzLjQiTiA3M8KwNTEnMjQuMSJF!5e0!3m2!1sen!2sin!4v1"
                   className="w-full h-full border-0 grayscale invert opacity-60"
@@ -193,7 +193,7 @@ const Index = () => {
               </div>
             </FadeIn>
             <FadeIn delay={0.2}>
-              <div className="flex flex-col justify-center min-w-0 overflow-hidden">
+              <div className="flex flex-col justify-center">
                 <p className="section-heading mb-6">Find Us</p>
                 <div className="space-y-4 mb-8">
                   <div className="flex items-start gap-3">
@@ -206,7 +206,7 @@ const Index = () => {
                   </div>
                 </div>
                 <div className="gold-divider-left mb-8" />
-                <div className="flex flex-col gap-3 w-full pr-1">
+                <div className="flex flex-col gap-3">
                   <a
                     href="https://zomato.com"
                     target="_blank"

@@ -13,7 +13,7 @@ const FadeIn = ({ children, delay = 0, className = "" }: FadeInProps) => (
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true, margin: "-50px" }}
     transition={{ duration: 0.7, delay, ease: "easeOut" }}
-    className={className}
+    className={`max-w-full ${className}`}
   >
     {children}
   </motion.div>
