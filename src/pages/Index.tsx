@@ -178,8 +178,8 @@ const Index = () => {
       </section>
 
       {/* Location + CTA */}
-      <section className="py-20 md:py-32 bg-muted">
-        <div className="container overflow-hidden">
+      <section className="py-20 md:py-32 bg-muted overflow-hidden">
+        <div className="container px-4 md:px-6">
           <div className="grid md:grid-cols-2 gap-12">
             <FadeIn>
               <div className="aspect-video md:aspect-auto md:h-full min-h-[300px] bg-card rounded-sm overflow-hidden max-w-full">
@@ -193,7 +193,7 @@ const Index = () => {
               </div>
             </FadeIn>
             <FadeIn delay={0.2}>
-              <div className="flex flex-col justify-center">
+              <div className="flex flex-col justify-center min-w-0 overflow-hidden">
                 <p className="section-heading mb-6">Find Us</p>
                 <div className="space-y-4 mb-8">
                   <div className="flex items-start gap-3">
@@ -206,31 +206,31 @@ const Index = () => {
                   </div>
                 </div>
                 <div className="gold-divider-left mb-8" />
-                <div className="flex flex-col gap-3 w-full overflow-hidden px-1">
+                <div className="flex flex-col gap-3 w-full pr-1">
                   <a
                     href="https://zomato.com"
                     target="_blank"
                     rel="noreferrer"
-                    className="flex items-center justify-center gap-2 px-3 py-3 bg-primary text-primary-foreground text-[10px] sm:text-xs uppercase tracking-[0.1em] sm:tracking-[0.15em] hover:bg-gold-light transition-all duration-500 w-full box-border"
+                    className="flex items-center justify-center gap-2 px-4 py-3 bg-primary text-primary-foreground text-[10px] sm:text-xs uppercase tracking-[0.08em] sm:tracking-[0.15em] hover:bg-gold-light transition-all duration-500"
                   >
                     <ExternalLink size={14} className="shrink-0" />
-                    <span className="truncate">Reserve on Zomato</span>
+                    <span>Reserve on Zomato</span>
                   </a>
                   <a
                     href="tel:+910000000000"
-                    className="flex items-center justify-center gap-2 px-3 py-3 border border-primary text-primary text-[10px] sm:text-xs uppercase tracking-[0.1em] sm:tracking-[0.15em] hover:bg-primary hover:text-primary-foreground transition-all duration-500 w-full box-border"
+                    className="flex items-center justify-center gap-2 px-4 py-3 border border-primary text-primary text-[10px] sm:text-xs uppercase tracking-[0.08em] sm:tracking-[0.15em] hover:bg-primary hover:text-primary-foreground transition-all duration-500"
                   >
                     <Phone size={14} className="shrink-0" />
-                    <span className="truncate">Call Now</span>
+                    <span>Call Now</span>
                   </a>
                   <a
                     href="https://instagram.com"
                     target="_blank"
                     rel="noreferrer"
-                    className="flex items-center justify-center gap-2 px-3 py-3 border border-border text-muted-foreground text-[10px] sm:text-xs uppercase tracking-[0.1em] sm:tracking-[0.15em] hover:border-primary hover:text-primary transition-all duration-500 w-full box-border"
+                    className="flex items-center justify-center gap-2 px-4 py-3 border border-border text-muted-foreground text-[10px] sm:text-xs uppercase tracking-[0.08em] sm:tracking-[0.15em] hover:border-primary hover:text-primary transition-all duration-500"
                   >
                     <Instagram size={14} className="shrink-0" />
-                    <span className="truncate">Instagram</span>
+                    <span>Instagram</span>
                   </a>
                 </div>
               </div>
