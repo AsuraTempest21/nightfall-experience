@@ -178,8 +178,8 @@ const Index = () => {
       </section>
 
       {/* Location + CTA */}
-      <section className="py-20 md:py-32 bg-muted">
-        <div className="container overflow-hidden">
+      <section className="py-20 md:py-32 bg-muted overflow-hidden">
+        <div className="container">
           <div className="grid md:grid-cols-2 gap-12 [&>*]:min-w-0">
             <FadeIn>
               <div className="aspect-video md:aspect-auto md:h-full min-h-[300px] bg-card rounded-sm overflow-hidden">
