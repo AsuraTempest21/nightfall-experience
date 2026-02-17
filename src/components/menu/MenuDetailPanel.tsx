@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, ChevronLeft, ChevronRight } from "lucide-react";
+import { X, ChevronLeft, ChevronRight, ChevronDown } from "lucide-react";
 import type { MenuItem } from "@/data/menuData";
 
 interface MenuDetailPanelProps {
@@ -128,29 +128,15 @@ const MenuDetailPanel = ({ item, onClose }: MenuDetailPanelProps) => {
                 {item.longDescription || item.description}
               </p>
 
-              {/* Ingredients */}
-              {item.ingredients && item.ingredients.length > 0 && (
-                <div>
-                  <h3 className="font-heading text-xs uppercase tracking-[0.2em] text-primary mb-3">
-                    Ingredients
-                  </h3>
-                  <ul className="space-y-1.5">
-                    {item.ingredients.map((ing) => (
-                      <li key={ing} className="text-sm text-muted-foreground">{ing}</li>
-                    ))}
-                  </ul>
-                  <div className="w-8 h-px bg-primary/40 mt-5" />
-                </div>
-              )}
-
-              {/* Macros — expandable */}
+              {/* Macros — expandable (placed early so it's not missed) */}
               {item.macros && (
-                <div>
+                <div className="bg-muted/30 rounded-sm p-4 -mx-1">
                   <button
                     onClick={() => setShowMacros(!showMacros)}
-                    className="text-xs uppercase tracking-[0.15em] text-primary/70 hover:text-primary transition-colors"
+                    className="flex items-center gap-1.5 text-xs uppercase tracking-[0.15em] text-primary/70 hover:text-primary transition-colors w-full"
                   >
                     {showMacros ? "Hide" : "View"} Nutritional Information
+                    <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-300 ${showMacros ? "rotate-180" : ""}`} />
                   </button>
                   <AnimatePresence>
                     {showMacros && (
@@ -170,6 +156,21 @@ const MenuDetailPanel = ({ item, onClose }: MenuDetailPanelProps) => {
                       </motion.div>
                     )}
                   </AnimatePresence>
+                </div>
+              )}
+
+              {/* Ingredients */}
+              {item.ingredients && item.ingredients.length > 0 && (
+                <div>
+                  <h3 className="font-heading text-xs uppercase tracking-[0.2em] text-primary mb-3">
+                    Ingredients
+                  </h3>
+                  <ul className="space-y-1.5">
+                    {item.ingredients.map((ing) => (
+                      <li key={ing} className="text-sm text-muted-foreground">{ing}</li>
+                    ))}
+                  </ul>
+                  <div className="w-8 h-px bg-primary/40 mt-5" />
                 </div>
               )}
 
