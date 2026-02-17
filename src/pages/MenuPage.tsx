@@ -1,82 +1,150 @@
+import { useState, useRef, useCallback, useEffect } from "react";
 import FadeIn from "@/components/FadeIn";
-import menuHero from "@/assets/menu-hero.jpg";
+import MenuCategoryTabs from "@/components/menu/MenuCategoryTabs";
+import MenuItemCard from "@/components/menu/MenuItemCard";
+import MenuDetailPanel from "@/components/menu/MenuDetailPanel";
+import MenuFilterDrawer, { type MenuFilters } from "@/components/menu/MenuFilterDrawer";
+import { categories, menuItems, type MenuItem } from "@/data/menuData";
 
-const cocktails = [
-  { name: "The Tichuka Sour", desc: "Bourbon, yuzu, egg white, smoked honey", price: "₹650" },
-  { name: "Emerald Negroni", desc: "Gin, Campari, sweet vermouth, matcha", price: "₹700" },
-  { name: "Midnight Margarita", desc: "Reposado tequila, activated charcoal, agave, lime", price: "₹600" },
-  { name: "Gold Rush Old Fashioned", desc: "Rye whiskey, saffron bitters, demerara", price: "₹750" },
-  { name: "Lychee Martini", desc: "Vodka, lychee liqueur, elderflower, lime", price: "₹600" },
-];
+const alcoholCategories = ["signature-cocktails", "classic-cocktails", "spirits"];
 
-const mains = [
-  { name: "Miso Glazed Sea Bass", desc: "White miso, dashi broth, bok choy", price: "₹1200" },
-  { name: "Lamb Rendang", desc: "Slow-cooked lamb, coconut, lemongrass, steamed rice", price: "₹1100" },
-  { name: "Truffle Mushroom Ramen", desc: "Porcini broth, truffle oil, soft egg, nori", price: "₹900" },
-  { name: "Thai Basil Chicken", desc: "Stir-fried chicken, holy basil, bird's eye chilli", price: "₹850" },
-];
+const initialFilters: MenuFilters = {
+  vegOnly: false,
+  nonVegOnly: false,
+  alcoholFree: false,
+  under500: false,
+  highProtein: false,
+  glutenFree: false,
+};
 
-const smallPlates = [
-  { name: "Prawn Tempura", desc: "Tiger prawns, wasabi mayo, pickled ginger", price: "₹550" },
-  { name: "Edamame Truffle", desc: "Steamed edamame, truffle salt, chilli flakes", price: "₹350" },
-  { name: "Tuna Tataki", desc: "Seared tuna, ponzu, sesame, microgreens", price: "₹650" },
-  { name: "Charred Corn Ribs", desc: "Smoked paprika butter, lime, coriander", price: "₹400" },
-];
+const MenuPage = () => {
+  const [activeCategory, setActiveCategory] = useState(categories[0].id);
+  const [selectedItem, setSelectedItem] = useState<MenuItem | null>(null);
+  const [filters, setFilters] = useState<MenuFilters>(initialFilters);
+  const sectionRefs = useRef<Record<string, HTMLDivElement | null>>({});
 
-interface MenuSectionProps {
-  title: string;
-  items: { name: string; desc: string; price: string }[];
-}
+  // Scroll to category section on tab click
+  const handleCategorySelect = useCallback((id: string) => {
+    setActiveCategory(id);
+    const el = sectionRefs.current[id];
+    if (el) {
+      const offset = 60; // sticky tabs height
+      const top = el.getBoundingClientRect().top + window.scrollY - offset;
+      window.scrollTo({ top, behavior: "smooth" });
+    }
+  }, []);
 
-const MenuSection = ({ title, items }: MenuSectionProps) => (
-  <div className="mb-16 last:mb-0">
-    <FadeIn>
-      <h2 className="section-heading mb-8">{title}</h2>
-      <div className="gold-divider-left mb-8" />
-    </FadeIn>
-    <div className="space-y-6">
-      {items.map((item, i) => (
-        <FadeIn key={item.name} delay={i * 0.08}>
-          <div className="flex justify-between items-baseline gap-4 group">
-            <div>
-              <h3 className="font-heading text-base md:text-lg text-foreground group-hover:text-primary transition-colors duration-300">
-                {item.name}
-              </h3>
-              <p className="text-sm text-muted-foreground mt-1">{item.desc}</p>
-            </div>
-            <span className="text-sm text-primary shrink-0 font-medium">{item.price}</span>
-          </div>
-        </FadeIn>
-      ))}
-    </div>
-  </div>
-);
+  // Update active tab on scroll
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            setActiveCategory(entry.target.id);
+          }
+        }
+      },
+      { rootMargin: "-80px 0px -60% 0px", threshold: 0 }
+    );
 
-const MenuPage = () => (
-  <main className="pb-16 md:pb-0">
-    {/* Hero */}
-    <section className="relative h-[50vh] md:h-[60vh] flex items-end overflow-hidden">
-      <div className="absolute inset-0">
-        <img src={menuHero} alt="Menu" className="w-full h-full object-cover" />
-        <div className="absolute inset-0 bg-background/80" />
+    Object.values(sectionRefs.current).forEach((el) => {
+      if (el) observer.observe(el);
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
+  // Filter items
+  const filterItems = (items: MenuItem[]) =>
+    items.filter((item) => {
+      if (filters.vegOnly && !item.isVeg) return false;
+      if (filters.nonVegOnly && item.isVeg) return false;
+      if (filters.alcoholFree && alcoholCategories.includes(item.category)) return false;
+      if (filters.under500 && item.price >= 500) return false;
+      if (filters.highProtein && !item.tags?.includes("High Protein")) return false;
+      if (filters.glutenFree && !item.tags?.includes("Gluten Free")) return false;
+      return true;
+    });
+
+  // Lock body scroll when panel open
+  useEffect(() => {
+    if (selectedItem) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => { document.body.style.overflow = ""; };
+  }, [selectedItem]);
+
+  return (
+    <main className="pb-16 md:pb-0">
+      {/* Hero */}
+      <section className="relative flex items-end justify-center py-20 md:py-28 bg-background">
+        <div className="container text-center">
+          <FadeIn>
+            <h1 className="font-heading text-3xl md:text-5xl uppercase tracking-[0.15em] text-foreground">
+              Menu
+            </h1>
+            <div className="gold-divider mt-5 mb-4" />
+            <p className="text-sm md:text-base text-muted-foreground tracking-wide">
+              Global Flavours &amp; Crafted Cocktails
+            </p>
+          </FadeIn>
+        </div>
+      </section>
+
+      {/* Sticky Category Tabs */}
+      <MenuCategoryTabs
+        categories={categories}
+        activeCategory={activeCategory}
+        onSelect={handleCategorySelect}
+      />
+
+      {/* Filter bar */}
+      <div className="container flex justify-end pt-4">
+        <MenuFilterDrawer filters={filters} onChange={setFilters} />
       </div>
-      <div className="relative z-10 container pb-12">
-        <FadeIn>
-          <p className="section-heading mb-4">Our Offerings</p>
-          <h1 className="font-heading text-3xl md:text-5xl text-foreground">The Menu</h1>
-        </FadeIn>
-      </div>
-    </section>
 
-    {/* Menu Content */}
-    <section className="py-16 md:py-24">
-      <div className="container max-w-2xl">
-        <MenuSection title="Signature Cocktails" items={cocktails} />
-        <MenuSection title="Asian Mains" items={mains} />
-        <MenuSection title="Small Plates" items={smallPlates} />
-      </div>
-    </section>
-  </main>
-);
+      {/* Menu Sections */}
+      <section className="pb-16 md:pb-24">
+        <div className="container">
+          {categories.map((cat) => {
+            const items = filterItems(menuItems.filter((i) => i.category === cat.id));
+            if (items.length === 0) return null;
+
+            return (
+              <div
+                key={cat.id}
+                id={cat.id}
+                ref={(el) => { sectionRefs.current[cat.id] = el; }}
+                className="pt-12 md:pt-16"
+              >
+                <FadeIn>
+                  <h2 className="section-heading mb-2">{cat.label}</h2>
+                  <p className="text-xs text-muted-foreground mb-6">{cat.tagline}</p>
+                  <div className="gold-divider-left mb-8" />
+                </FadeIn>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+                  {items.map((item, i) => (
+                    <MenuItemCard
+                      key={item.id}
+                      item={item}
+                      index={i}
+                      onClick={() => setSelectedItem(item)}
+                    />
+                  ))}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </section>
+
+      {/* Detail Panel */}
+      <MenuDetailPanel item={selectedItem} onClose={() => setSelectedItem(null)} />
+    </main>
+  );
+};
 
 export default MenuPage;
