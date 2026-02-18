@@ -14,10 +14,11 @@ const MenuItemCard = ({ item, index, onClick }: MenuItemCardProps) => (
     viewport={{ once: true, margin: "-30px" }}
     transition={{ duration: 0.5, delay: index * 0.06 }}
     onClick={onClick}
-    className="group w-full text-left bg-card rounded-sm overflow-hidden border border-transparent hover:border-primary/30 transition-all duration-300 hover:-translate-y-1"
+    className="group w-full text-left bg-surface-elevated rounded-sm overflow-hidden border border-border/50 hover:border-primary/40 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_30px_-12px_hsl(var(--primary)/0.15)]"
   >
     {/* Image */}
-    <div className="aspect-[4/3] overflow-hidden bg-muted">
+    <div className="aspect-[4/3] overflow-hidden bg-muted relative">
+      <div className="absolute inset-0 bg-gradient-to-t from-background/40 to-transparent z-10 pointer-events-none" />
       <img
         src={item.images[0]}
         alt={item.name}
