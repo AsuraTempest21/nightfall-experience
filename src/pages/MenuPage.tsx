@@ -109,7 +109,7 @@ const MenuPage = () => {
       </div>
 
       {/* Menu Sections */}
-      <section className="pb-16 md:pb-24">
+      <section className="pb-16 md:pb-24 menu-texture">
         <div className="container">
           {categories.map((cat, catIdx) => {
             const items = filterItems(menuItems.filter((i) => i.category === cat.id));
