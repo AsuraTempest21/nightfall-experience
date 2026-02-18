@@ -79,9 +79,12 @@ const MenuPage = () => {
   return (
     <main className="pb-16 md:pb-0">
       {/* Hero */}
-      <section className="relative flex items-end justify-center py-20 md:py-28 bg-background">
+      <section className="relative flex items-end justify-center py-24 md:py-32 bg-gradient-to-b from-accent/30 via-background to-background">
         <div className="container text-center">
           <FadeIn>
+            <p className="text-[10px] md:text-xs uppercase tracking-[0.35em] text-primary/60 mb-4">
+              Tichuka
+            </p>
             <h1 className="font-heading text-3xl md:text-5xl uppercase tracking-[0.15em] text-foreground">
               Menu
             </h1>
@@ -108,7 +111,7 @@ const MenuPage = () => {
       {/* Menu Sections */}
       <section className="pb-16 md:pb-24">
         <div className="container">
-          {categories.map((cat) => {
+          {categories.map((cat, catIdx) => {
             const items = filterItems(menuItems.filter((i) => i.category === cat.id));
             if (items.length === 0) return null;
 
@@ -117,7 +120,7 @@ const MenuPage = () => {
                 key={cat.id}
                 id={cat.id}
                 ref={(el) => { sectionRefs.current[cat.id] = el; }}
-                className="pt-12 md:pt-16"
+                className={`pt-12 md:pt-16 ${catIdx > 0 ? "border-t border-border/40" : ""}`}
               >
                 <FadeIn>
                   <h2 className="section-heading mb-2">{cat.label}</h2>
