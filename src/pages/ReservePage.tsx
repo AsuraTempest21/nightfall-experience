@@ -2,7 +2,7 @@ import FadeIn from "@/components/FadeIn";
 import { MapPin, Phone, Clock, ExternalLink, Instagram } from "lucide-react";
 
 const ReservePage = () => (
-  <main className="pb-16 md:pb-0 pt-20 md:pt-24">
+  <main className="pb-16 md:pb-0 pt-20 md:pt-24 menu-texture">
     <section className="py-16 md:py-24">
       <div className="container max-w-4xl">
         <FadeIn>
