@@ -9,6 +9,7 @@ import StickyReserve from "@/components/StickyReserve";
 import Index from "./pages/Index";
 import MenuPage from "./pages/MenuPage";
 import ReservePage from "./pages/ReservePage";
+import EventsPage from "./pages/EventsPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -24,6 +25,7 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/menu" element={<MenuPage />} />
           <Route path="/reserve" element={<ReservePage />} />
+          <Route path="/events" element={<EventsPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
         <Footer />
