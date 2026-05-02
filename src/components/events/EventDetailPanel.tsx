@@ -6,9 +6,10 @@ import type { EventItem } from "@/data/eventsData";
 interface EventDetailPanelProps {
   event: EventItem | null;
   onClose: () => void;
+  onBook?: (event: EventItem) => void;
 }
 
-const EventDetailPanel = ({ event, onClose }: EventDetailPanelProps) => {
+const EventDetailPanel = ({ event, onClose, onBook }: EventDetailPanelProps) => {
   useEffect(() => {
     if (event) {
       document.body.style.overflow = "hidden";
