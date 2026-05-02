@@ -111,7 +111,7 @@ const EventsPage = () => {
                   <button
                     onClick={(e) => {
                       e.stopPropagation();
-                      setSelectedEvent(featured);
+                      openBooking(featured);
                     }}
                     className="px-6 py-3 bg-primary text-primary-foreground text-xs uppercase tracking-[0.15em] hover:bg-gold-light transition-all duration-500"
                   >
