@@ -12,6 +12,12 @@ const upcoming = eventsData.filter((e) => !e.isFeatured);
 
 const EventsPage = () => {
   const [selectedEvent, setSelectedEvent] = useState<EventItem | null>(null);
+  const [bookingEvent, setBookingEvent] = useState<EventItem | null>(null);
+
+  const openBooking = (event: EventItem) => {
+    setSelectedEvent(null);
+    setBookingEvent(event);
+  };
 
   useEffect(() => {
     if (selectedEvent) {
