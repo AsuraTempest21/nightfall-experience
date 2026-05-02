@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import FadeIn from "@/components/FadeIn";
 import EventCard from "@/components/events/EventCard";
 import EventDetailPanel from "@/components/events/EventDetailPanel";
+import EventBookingModal from "@/components/events/EventBookingModal";
 import { eventsData, type EventItem } from "@/data/eventsData";
 import { Calendar, Clock, MapPin, ArrowDown, Sparkles } from "lucide-react";
 import eventsHero from "@/assets/events-hero.jpg";
