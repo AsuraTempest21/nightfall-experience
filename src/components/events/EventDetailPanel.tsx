@@ -6,9 +6,10 @@ import type { EventItem } from "@/data/eventsData";
 interface EventDetailPanelProps {
   event: EventItem | null;
   onClose: () => void;
+  onBook?: (event: EventItem) => void;
 }
 
-const EventDetailPanel = ({ event, onClose }: EventDetailPanelProps) => {
+const EventDetailPanel = ({ event, onClose, onBook }: EventDetailPanelProps) => {
   useEffect(() => {
     if (event) {
       document.body.style.overflow = "hidden";
@@ -171,14 +172,12 @@ const EventDetailPanel = ({ event, onClose }: EventDetailPanelProps) => {
 
               {/* CTA */}
               <div className="sticky bottom-0 pt-4 pb-2 bg-card">
-                <a
-                  href="https://zomato.com"
-                  target="_blank"
-                  rel="noreferrer"
+                <button
+                  onClick={() => onBook?.(event)}
                   className="block w-full text-center py-4 bg-primary text-primary-foreground text-xs uppercase tracking-[0.2em] hover:bg-gold-light transition-all duration-500"
                 >
                   Book Now
-                </a>
+                </button>
               </div>
             </div>
           </motion.div>

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import FadeIn from "@/components/FadeIn";
 import EventCard from "@/components/events/EventCard";
 import EventDetailPanel from "@/components/events/EventDetailPanel";
+import EventBookingModal from "@/components/events/EventBookingModal";
 import { eventsData, type EventItem } from "@/data/eventsData";
 import { Calendar, Clock, MapPin, ArrowDown, Sparkles } from "lucide-react";
 import eventsHero from "@/assets/events-hero.jpg";
@@ -11,6 +12,12 @@ const upcoming = eventsData.filter((e) => !e.isFeatured);
 
 const EventsPage = () => {
   const [selectedEvent, setSelectedEvent] = useState<EventItem | null>(null);
+  const [bookingEvent, setBookingEvent] = useState<EventItem | null>(null);
+
+  const openBooking = (event: EventItem) => {
+    setSelectedEvent(null);
+    setBookingEvent(event);
+  };
 
   useEffect(() => {
     if (selectedEvent) {
@@ -104,7 +111,7 @@ const EventsPage = () => {
                   <button
                     onClick={(e) => {
                       e.stopPropagation();
-                      setSelectedEvent(featured);
+                      openBooking(featured);
                     }}
                     className="px-6 py-3 bg-primary text-primary-foreground text-xs uppercase tracking-[0.15em] hover:bg-gold-light transition-all duration-500"
                   >
@@ -174,7 +181,14 @@ const EventsPage = () => {
       </section>
 
       {/* Detail Panel */}
-      <EventDetailPanel event={selectedEvent} onClose={() => setSelectedEvent(null)} />
+      <EventDetailPanel
+        event={selectedEvent}
+        onClose={() => setSelectedEvent(null)}
+        onBook={openBooking}
+      />
+
+      {/* Booking Modal */}
+      <EventBookingModal event={bookingEvent} onClose={() => setBookingEvent(null)} />
     </main>
   );
 };
