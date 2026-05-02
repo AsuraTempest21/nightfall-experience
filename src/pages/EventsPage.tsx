@@ -181,7 +181,14 @@ const EventsPage = () => {
       </section>
 
       {/* Detail Panel */}
-      <EventDetailPanel event={selectedEvent} onClose={() => setSelectedEvent(null)} />
+      <EventDetailPanel
+        event={selectedEvent}
+        onClose={() => setSelectedEvent(null)}
+        onBook={openBooking}
+      />
+
+      {/* Booking Modal */}
+      <EventBookingModal event={bookingEvent} onClose={() => setBookingEvent(null)} />
     </main>
   );
 };
