@@ -1,8 +1,15 @@
 import FadeIn from "@/components/FadeIn";
+import SEOHead from "@/components/SEOHead";
+import { config } from "@/lib/config";
+import ReservationForm from "@/components/reserve/ReservationForm";
 import { MapPin, Phone, Clock, ExternalLink, Instagram } from "lucide-react";
 
 const ReservePage = () => (
   <main className="pb-16 md:pb-0 pt-20 md:pt-24 menu-texture">
+    <SEOHead
+      title="Reserve — Tichuka | Book Your Table"
+      description="Reserve your table at Tichuka. Premium late-night dining and cocktail bar in Koregaon Park, Pune. Walk-ins welcome."
+    />
     <section className="py-16 md:py-24">
       <div className="container max-w-4xl">
         <FadeIn>
@@ -22,7 +29,10 @@ const ReservePage = () => (
                 <div className="flex items-start gap-3">
                   <MapPin size={16} className="text-primary mt-1 shrink-0" />
                   <p className="text-sm text-muted-foreground leading-relaxed">
-                    123 Night Street, Koregaon Park,<br />Pune 411001, India
+                    {config.contact.address.replace(", Pune", ",\nPune").split("\n").map((line, i) => (
+                      <span key={i}>{line}{i === 0 && <br />}</span>
+                    ))}
+                    , India
                   </p>
                 </div>
               </div>
@@ -31,8 +41,8 @@ const ReservePage = () => (
                 <h3 className="section-heading mb-4">Contact</h3>
                 <div className="flex items-center gap-3">
                   <Phone size={16} className="text-primary shrink-0" />
-                  <a href="tel:+910000000000" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                    +91 00000 00000
+                  <a href={`tel:${config.contact.phone}`} className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                    {config.contact.phoneDisplay}
                   </a>
                 </div>
               </div>
@@ -53,7 +63,7 @@ const ReservePage = () => (
 
               <div className="flex flex-col gap-3 w-full overflow-hidden">
                 <a
-                  href="https://zomato.com"
+                  href={config.external.zomatoUrl}
                   target="_blank"
                   rel="noreferrer"
                   className="flex items-center justify-center gap-2 px-3 py-3 bg-primary text-primary-foreground text-[10px] sm:text-xs uppercase tracking-[0.1em] sm:tracking-[0.15em] hover:bg-gold-light transition-all duration-500 w-full box-border"
@@ -62,14 +72,14 @@ const ReservePage = () => (
                   <span className="truncate">Reserve on Zomato</span>
                 </a>
                 <a
-                  href="tel:+910000000000"
+                  href={`tel:${config.contact.phone}`}
                   className="flex items-center justify-center gap-2 px-3 py-3 border border-primary text-primary text-[10px] sm:text-xs uppercase tracking-[0.1em] sm:tracking-[0.15em] hover:bg-primary hover:text-primary-foreground transition-all duration-500 w-full box-border"
                 >
                   <Phone size={14} className="shrink-0" />
                   <span className="truncate">Call Now</span>
                 </a>
                 <a
-                  href="https://instagram.com"
+                  href={config.external.instagramUrl}
                   target="_blank"
                   rel="noreferrer"
                   className="flex items-center justify-center gap-2 px-3 py-3 border border-border text-muted-foreground text-[10px] sm:text-xs uppercase tracking-[0.1em] sm:tracking-[0.15em] hover:border-primary hover:text-primary transition-all duration-500 w-full box-border"
@@ -81,16 +91,20 @@ const ReservePage = () => (
             </div>
           </FadeIn>
 
-          {/* Map */}
+          {/* Reservation form + map */}
           <FadeIn delay={0.2}>
-            <div className="aspect-square md:aspect-auto md:h-full min-h-[300px] bg-card rounded-sm overflow-hidden">
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3783.204308!2d73.8567!3d18.5204!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTjCsDMxJzEzLjQiTiA3M8KwNTEnMjQuMSJF!5e0!3m2!1sen!2sin!4v1"
-                className="w-full h-full border-0 grayscale invert opacity-60"
-                allowFullScreen
-                loading="lazy"
-                title="Tichuka location"
-              />
+            <div className="space-y-8">
+              <ReservationForm />
+
+              <div className="aspect-square md:aspect-auto md:h-[420px] min-h-[300px] bg-card rounded-sm overflow-hidden">
+                <iframe
+                  src={config.external.googleMapsEmbedUrl}
+                  className="w-full h-full border-0 grayscale invert opacity-60"
+                  allowFullScreen
+                  loading="lazy"
+                  title="Tichuka location"
+                />
+              </div>
             </div>
           </FadeIn>
         </div>

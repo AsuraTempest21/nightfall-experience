@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Calendar, Clock, MapPin, Shirt, Music, Utensils, Star } from "lucide-react";
 import type { EventItem } from "@/data/eventsData";
+import { config } from "@/lib/config";
 
 interface EventDetailPanelProps {
   event: EventItem | null;
@@ -172,8 +173,10 @@ const EventDetailPanel = ({ event, onClose, onBook }: EventDetailPanelProps) => 
 
               {/* CTA */}
               <div className="sticky bottom-0 pt-4 pb-2 bg-card">
-                <button
-                  onClick={() => onBook?.(event)}
+                <a
+                  href="https://zomato.com"
+                  target="_blank"
+                  rel="noreferrer"
                   className="block w-full text-center py-4 bg-primary text-primary-foreground text-xs uppercase tracking-[0.2em] hover:bg-gold-light transition-all duration-500"
                 >
                   Book Now

@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 import FadeIn from "@/components/FadeIn";
+import SEOHead from "@/components/SEOHead";
+import { config } from "@/lib/config";
 
 import heroBg from "@/assets/hero-bg.jpg";
 import cocktailBrand from "@/assets/cocktail-brand.jpg";
@@ -27,6 +29,10 @@ const galleryImages = [gallery1, gallery2, gallery3, gallery4, gallery5, gallery
 const Index = () => {
   return (
     <main className="pb-16 md:pb-0 overflow-x-hidden">
+      <SEOHead
+        title="Tichuka — Crafted Cocktails. Global Flavours. After Dark."
+        description="Tichuka is a premium late-night dining and cocktail bar in Pune. Signature cocktails, Asian-inspired cuisine, and an unforgettable nightlife experience."
+      />
       {/* Hero */}
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
@@ -184,7 +190,7 @@ const Index = () => {
             <FadeIn className="max-w-full overflow-hidden">
               <div className="aspect-video md:aspect-auto md:h-full min-h-[300px] bg-card rounded-sm overflow-hidden max-w-full">
                 <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3783.204308!2d73.8567!3d18.5204!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTjCsDMxJzEzLjQiTiA3M8KwNTEnMjQuMSJF!5e0!3m2!1sen!2sin!4v1"
+                  src={config.external.googleMapsEmbedUrl}
                   className="w-full h-full border-0 grayscale invert opacity-60"
                   allowFullScreen
                   loading="lazy"
@@ -198,17 +204,17 @@ const Index = () => {
                 <div className="space-y-4 mb-8">
                   <div className="flex items-start gap-3">
                     <MapPin size={16} className="text-primary mt-1 shrink-0" />
-                    <p className="text-sm text-muted-foreground">123 Night Street, Koregaon Park, Pune 411001</p>
+                    <p className="text-sm text-muted-foreground">{config.contact.address}</p>
                   </div>
                   <div className="flex items-center gap-3">
                     <Phone size={16} className="text-primary shrink-0" />
-                    <p className="text-sm text-muted-foreground">+91 00000 00000</p>
+                    <p className="text-sm text-muted-foreground">{config.contact.phoneDisplay}</p>
                   </div>
                 </div>
                 <div className="gold-divider-left mb-8" />
                 <div className="flex flex-col gap-3">
                   <a
-                    href="https://zomato.com"
+                    href={config.external.zomatoUrl}
                     target="_blank"
                     rel="noreferrer"
                     className="flex items-center justify-center gap-2 px-4 py-3 bg-primary text-primary-foreground text-[10px] sm:text-xs uppercase tracking-[0.08em] sm:tracking-[0.15em] hover:bg-gold-light transition-all duration-500"
@@ -217,14 +223,14 @@ const Index = () => {
                     <span>Reserve on Zomato</span>
                   </a>
                   <a
-                    href="tel:+910000000000"
+                    href={`tel:${config.contact.phone}`}
                     className="flex items-center justify-center gap-2 px-4 py-3 border border-primary text-primary text-[10px] sm:text-xs uppercase tracking-[0.08em] sm:tracking-[0.15em] hover:bg-primary hover:text-primary-foreground transition-all duration-500"
                   >
                     <Phone size={14} className="shrink-0" />
                     <span>Call Now</span>
                   </a>
                   <a
-                    href="https://instagram.com"
+                    href={config.external.instagramUrl}
                     target="_blank"
                     rel="noreferrer"
                     className="flex items-center justify-center gap-2 px-4 py-3 border border-border text-muted-foreground text-[10px] sm:text-xs uppercase tracking-[0.08em] sm:tracking-[0.15em] hover:border-primary hover:text-primary transition-all duration-500"

@@ -1,10 +1,13 @@
 import { useState, useRef, useCallback, useEffect } from "react";
 import FadeIn from "@/components/FadeIn";
+import SEOHead from "@/components/SEOHead";
+import PageLoader from "@/components/PageLoader";
 import MenuCategoryTabs from "@/components/menu/MenuCategoryTabs";
 import MenuItemCard from "@/components/menu/MenuItemCard";
 import MenuDetailPanel from "@/components/menu/MenuDetailPanel";
 import MenuFilterDrawer, { type MenuFilters } from "@/components/menu/MenuFilterDrawer";
-import { categories, menuItems, type MenuItem } from "@/data/menuData";
+import { useMenu } from "@/hooks/use-menu";
+import type { MenuItem } from "@/data/menuData";
 
 const alcoholCategories = ["signature-cocktails", "classic-cocktails", "spirits"];
 
@@ -18,10 +21,19 @@ const initialFilters: MenuFilters = {
 };
 
 const MenuPage = () => {
-  const [activeCategory, setActiveCategory] = useState(categories[0].id);
+  const { data, isLoading, isError, error, refetch, isFetching } = useMenu();
+  const categories = data?.categories ?? [];
+  const menuItems = data?.items ?? [];
+  const [activeCategory, setActiveCategory] = useState("");
   const [selectedItem, setSelectedItem] = useState<MenuItem | null>(null);
   const [filters, setFilters] = useState<MenuFilters>(initialFilters);
   const sectionRefs = useRef<Record<string, HTMLDivElement | null>>({});
+
+  useEffect(() => {
+    if (!activeCategory && categories.length > 0) {
+      setActiveCategory(categories[0].id);
+    }
+  }, [activeCategory, categories]);
 
   // Scroll to category section on tab click
   const handleCategorySelect = useCallback((id: string) => {
@@ -36,6 +48,8 @@ const MenuPage = () => {
 
   // Update active tab on scroll
   useEffect(() => {
+    if (categories.length === 0) return;
+
     const observer = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
@@ -52,7 +66,7 @@ const MenuPage = () => {
     });
 
     return () => observer.disconnect();
-  }, []);
+  }, [categories]);
 
   // Filter items
   const filterItems = (items: MenuItem[]) =>
@@ -76,8 +90,43 @@ const MenuPage = () => {
     return () => { document.body.style.overflow = ""; };
   }, [selectedItem]);
 
+  if (isLoading) {
+    return <PageLoader />;
+  }
+
+  if (isError) {
+    const message = error instanceof Error ? error.message : "Failed to load menu data.";
+
+    return (
+      <main className="min-h-[60vh] flex items-center justify-center px-4 py-24">
+        <section className="max-w-lg rounded-sm border border-border/60 bg-background/80 p-6 text-center shadow-sm backdrop-blur-sm">
+          <p className="text-[10px] uppercase tracking-[0.35em] text-primary/60 mb-3">
+            Tichuka
+          </p>
+          <h1 className="font-heading text-2xl uppercase tracking-[0.15em] text-foreground">
+            Menu unavailable
+          </h1>
+          <p className="mt-4 text-sm text-muted-foreground leading-relaxed">
+            {message}
+          </p>
+          <button
+            type="button"
+            onClick={() => refetch()}
+            className="mt-6 inline-flex items-center justify-center rounded-sm border border-primary/30 px-4 py-2 text-xs uppercase tracking-[0.15em] text-primary transition-colors hover:bg-primary/10"
+          >
+            Retry {isFetching ? "..." : "load"}
+          </button>
+        </section>
+      </main>
+    );
+  }
+
   return (
     <main className="pb-16 md:pb-0">
+      <SEOHead
+        title="Menu — Tichuka | Crafted Cocktails & Global Flavours"
+        description="Explore Tichuka's curated menu — signature cocktails, Asian mains, sushi specialties, and more. Global flavours, crafted in-house."
+      />
       {/* Hero */}
       <section className="relative flex items-end justify-center py-24 md:py-32 bg-gradient-to-b from-accent/30 via-background to-background">
         <div className="container text-center">
@@ -97,11 +146,13 @@ const MenuPage = () => {
       </section>
 
       {/* Sticky Category Tabs */}
-      <MenuCategoryTabs
-        categories={categories}
-        activeCategory={activeCategory}
-        onSelect={handleCategorySelect}
-      />
+      {categories.length > 0 && (
+        <MenuCategoryTabs
+          categories={categories}
+          activeCategory={activeCategory || categories[0].id}
+          onSelect={handleCategorySelect}
+        />
+      )}
 
       {/* Filter bar */}
       <div className="container flex justify-end pt-4">

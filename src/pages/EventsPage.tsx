@@ -1,23 +1,33 @@
 import { useState, useEffect } from "react";
 import FadeIn from "@/components/FadeIn";
+import SEOHead from "@/components/SEOHead";
+import PageLoader from "@/components/PageLoader";
 import EventCard from "@/components/events/EventCard";
 import EventDetailPanel from "@/components/events/EventDetailPanel";
+<<<<<<< HEAD
 import EventBookingModal from "@/components/events/EventBookingModal";
 import { eventsData, type EventItem } from "@/data/eventsData";
+=======
+import { useEvents } from "@/hooks/use-events";
+import type { EventItem } from "@/data/eventsData";
+>>>>>>> 66ca148 (backend completed!)
 import { Calendar, Clock, MapPin, ArrowDown, Sparkles } from "lucide-react";
 import eventsHero from "@/assets/events-hero.jpg";
 
-const featured = eventsData.find((e) => e.isFeatured)!;
-const upcoming = eventsData.filter((e) => !e.isFeatured);
-
 const EventsPage = () => {
+  const { data, isLoading, isError, error, refetch, isFetching } = useEvents();
   const [selectedEvent, setSelectedEvent] = useState<EventItem | null>(null);
+<<<<<<< HEAD
   const [bookingEvent, setBookingEvent] = useState<EventItem | null>(null);
 
   const openBooking = (event: EventItem) => {
     setSelectedEvent(null);
     setBookingEvent(event);
   };
+=======
+  const featured = data?.find((e) => e.isFeatured) ?? data?.[0] ?? null;
+  const upcoming = data?.filter((e) => !e.isFeatured) ?? [];
+>>>>>>> 66ca148 (backend completed!)
 
   useEffect(() => {
     if (selectedEvent) {
@@ -32,8 +42,61 @@ const EventsPage = () => {
     document.getElementById("upcoming-events")?.scrollIntoView({ behavior: "smooth" });
   };
 
+  if (isLoading) {
+    return <PageLoader />;
+  }
+
+  if (isError) {
+    const message = error instanceof Error ? error.message : "Failed to load events.";
+
+    return (
+      <main className="min-h-[60vh] flex items-center justify-center px-4 py-24">
+        <section className="max-w-lg rounded-sm border border-border/60 bg-background/80 p-6 text-center shadow-sm backdrop-blur-sm">
+          <p className="text-[10px] uppercase tracking-[0.35em] text-primary/60 mb-3">
+            Tichuka
+          </p>
+          <h1 className="font-heading text-2xl uppercase tracking-[0.15em] text-foreground">
+            Events unavailable
+          </h1>
+          <p className="mt-4 text-sm text-muted-foreground leading-relaxed">
+            {message}
+          </p>
+          <button
+            type="button"
+            onClick={() => refetch()}
+            className="mt-6 inline-flex items-center justify-center rounded-sm border border-primary/30 px-4 py-2 text-xs uppercase tracking-[0.15em] text-primary transition-colors hover:bg-primary/10"
+          >
+            Retry {isFetching ? "..." : "load"}
+          </button>
+        </section>
+      </main>
+    );
+  }
+
+  if (!featured) {
+    return (
+      <main className="min-h-[60vh] flex items-center justify-center px-4 py-24">
+        <section className="max-w-lg rounded-sm border border-border/60 bg-background/80 p-6 text-center shadow-sm backdrop-blur-sm">
+          <p className="text-[10px] uppercase tracking-[0.35em] text-primary/60 mb-3">
+            Tichuka
+          </p>
+          <h1 className="font-heading text-2xl uppercase tracking-[0.15em] text-foreground">
+            No events available
+          </h1>
+          <p className="mt-4 text-sm text-muted-foreground leading-relaxed">
+            Please check back soon for upcoming nights and experiences.
+          </p>
+        </section>
+      </main>
+    );
+  }
+
   return (
     <main className="pb-16 md:pb-0">
+      <SEOHead
+        title="Events — Tichuka | Curated Nights & Experiences"
+        description="Discover upcoming events at Tichuka — themed nights, live music, brunch experiences, and private celebrations in Pune."
+      />
       {/* ─── HERO ─── */}
       <section className="relative min-h-[70vh] md:min-h-[80vh] flex items-center justify-center overflow-hidden">
         <img
