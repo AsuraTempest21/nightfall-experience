@@ -173,14 +173,24 @@ const EventDetailPanel = ({ event, onClose, onBook }: EventDetailPanelProps) => 
 
               {/* CTA */}
               <div className="sticky bottom-0 pt-4 pb-2 bg-card">
-                <a
-                  href="https://zomato.com"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="block w-full text-center py-4 bg-primary text-primary-foreground text-xs uppercase tracking-[0.2em] hover:bg-gold-light transition-all duration-500"
-                >
-                  Book Now
-                </button>
+                {onBook ? (
+                  <button
+                    type="button"
+                    onClick={() => onBook(event)}
+                    className="block w-full text-center py-4 bg-primary text-primary-foreground text-xs uppercase tracking-[0.2em] hover:bg-gold-light transition-all duration-500"
+                  >
+                    Book Now
+                  </button>
+                ) : (
+                  <a
+                    href={config.external.zomatoUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="block w-full text-center py-4 bg-primary text-primary-foreground text-xs uppercase tracking-[0.2em] hover:bg-gold-light transition-all duration-500"
+                  >
+                    Book Now
+                  </a>
+                )}
               </div>
             </div>
           </motion.div>

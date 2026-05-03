@@ -4,30 +4,23 @@ import SEOHead from "@/components/SEOHead";
 import PageLoader from "@/components/PageLoader";
 import EventCard from "@/components/events/EventCard";
 import EventDetailPanel from "@/components/events/EventDetailPanel";
-<<<<<<< HEAD
 import EventBookingModal from "@/components/events/EventBookingModal";
-import { eventsData, type EventItem } from "@/data/eventsData";
-=======
 import { useEvents } from "@/hooks/use-events";
 import type { EventItem } from "@/data/eventsData";
->>>>>>> 66ca148 (backend completed!)
 import { Calendar, Clock, MapPin, ArrowDown, Sparkles } from "lucide-react";
 import eventsHero from "@/assets/events-hero.jpg";
 
 const EventsPage = () => {
   const { data, isLoading, isError, error, refetch, isFetching } = useEvents();
   const [selectedEvent, setSelectedEvent] = useState<EventItem | null>(null);
-<<<<<<< HEAD
   const [bookingEvent, setBookingEvent] = useState<EventItem | null>(null);
 
   const openBooking = (event: EventItem) => {
     setSelectedEvent(null);
     setBookingEvent(event);
   };
-=======
   const featured = data?.find((e) => e.isFeatured) ?? data?.[0] ?? null;
   const upcoming = data?.filter((e) => !e.isFeatured) ?? [];
->>>>>>> 66ca148 (backend completed!)
 
   useEffect(() => {
     if (selectedEvent) {
